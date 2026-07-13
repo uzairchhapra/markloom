@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.markloom-cache/
+dist-fixtures/
+.pagefind/
+coverage/
+playwright-report/
+test-results/
+.DS_Store
+*.log

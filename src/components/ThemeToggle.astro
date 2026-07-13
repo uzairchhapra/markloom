@@ -1,0 +1,44 @@
+---
+import { Monitor, Moon, Sun } from "@lucide/astro";
+---
+
+<button
+  class="theme-toggle"
+  type="button"
+  aria-label="Toggle appearance"
+  data-theme-toggle
+>
+  <span class="theme-icon theme-icon-light" aria-hidden="true"><Sun /></span>
+  <span class="theme-icon theme-icon-dark" aria-hidden="true"><Moon /></span>
+  <span class="theme-icon theme-icon-system" aria-hidden="true"
+    ><Monitor /></span
+  >
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>(
+    "[data-theme-toggle]",
+  );
+  const key = "markloom-appearance";
+  const modes = ["light", "dark", "system"] as const;
+
+  function apply(mode: (typeof modes)[number]) {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+    document.documentElement.dataset.appearance =
+      mode === "system" ? (prefersDark ? "dark" : "light") : mode;
+    document.documentElement.dataset.themeMode = mode;
+    localStorage.setItem(key, mode);
+    if (button) {
+      button.title = `Appearance: ${mode}`;
+    }
+  }
+
+  button?.addEventListener("click", () => {
+    const current = (document.documentElement.dataset.themeMode ||
+      "system") as (typeof modes)[number];
+    const next = modes[(modes.indexOf(current) + 1) % modes.length];
+    apply(next);
+  });
+</script>

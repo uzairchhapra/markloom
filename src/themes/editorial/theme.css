@@ -1,0 +1,30 @@
+.theme-editorial {
+  --color-background: #fbfaf7;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f0eee8;
+  --color-text: #1f2328;
+  --color-text-muted: #62615b;
+  --color-border: #ddd8cd;
+  --color-accent: #9b2c2c;
+  --color-accent-contrast: #ffffff;
+  --color-detail: #315f7a;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-code: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --content-width: 76rem;
+  --article-width: 50rem;
+  --radius-small: 0.25rem;
+  --radius-medium: 0.4rem;
+}
+
+.theme-editorial[data-appearance="dark"] {
+  --color-background: #14110f;
+  --color-surface: #211c18;
+  --color-surface-muted: #2b251f;
+  --color-text: #fff8ed;
+  --color-text-muted: #d6c8b8;
+  --color-border: #40372f;
+  --color-accent: #ff9b73;
+  --color-accent-contrast: #22100a;
+  --color-detail: #91c7e5;
+}

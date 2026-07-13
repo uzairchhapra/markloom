@@ -1,0 +1,69 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { projectUrl } from "@core/urls";
+import { normalizeProject } from "@schema/normalize";
+import type { Project } from "@schema/normalize";
+import { CodeXml, ExternalLink } from "@lucide/astro";
+
+interface Props {
+  entry: CollectionEntry<"projects">;
+  project: Project;
+}
+
+export async function getStaticPaths() {
+  const entries: CollectionEntry<"projects">[] =
+    await getCollection("projects");
+  return entries.map((entry) => {
+    const project = normalizeProject(entry);
+    return {
+      params: { slug: project.slug },
+      props: { entry, project },
+    };
+  });
+}
+
+const { entry, project } = Astro.props as Props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={project.title}
+  description={project.description}
+  canonicalPath={projectUrl(project.slug)}
+>
+  <article class="section section-inner article-shell" data-pagefind-body>
+    <header class="article-header">
+      <p class="eyebrow">Project</p>
+      <h1>{project.title}</h1>
+      <p class="lede">{project.description}</p>
+      {
+        (project.url || project.repositoryUrl) && (
+          <div class="article-actions">
+            {project.url && (
+              <a class="button" href={project.url}>
+                Visit project <ExternalLink size={15} aria-hidden="true" />
+              </a>
+            )}
+            {project.repositoryUrl && (
+              <a class="button button-secondary" href={project.repositoryUrl}>
+                View source <CodeXml size={15} aria-hidden="true" />
+              </a>
+            )}
+          </div>
+        )
+      }
+    </header>
+    {
+      project.image && (
+        <figure class="project-hero-media">
+          <img src={project.image.src} alt={project.image.alt} />
+        </figure>
+      )
+    }
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

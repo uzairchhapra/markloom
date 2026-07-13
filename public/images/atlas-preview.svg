@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Atlas Public Works dashboard</title>
+  <desc id="desc">A service request dashboard with navigation, status rows, and a street map.</desc>
+  <rect width="960" height="600" fill="#e7ebe7"/>
+  <rect x="32" y="30" width="896" height="540" rx="8" fill="#fdfefd" stroke="#9aa69d" stroke-width="2"/>
+  <rect x="32" y="30" width="190" height="540" rx="8" fill="#1d322d"/>
+  <circle cx="72" cy="74" r="16" fill="#f26b52"/>
+  <path d="M103 67h77M103 80h49" stroke="#dbe7e0" stroke-width="8"/>
+  <g fill="#88a69a">
+    <rect x="62" y="142" width="112" height="10" rx="5"/>
+    <rect x="62" y="186" width="82" height="10" rx="5"/>
+    <rect x="62" y="230" width="96" height="10" rx="5"/>
+    <rect x="62" y="274" width="68" height="10" rx="5"/>
+  </g>
+  <path d="M262 84h260M262 112h180" stroke="#19312b" stroke-width="14"/>
+  <rect x="262" y="162" width="300" height="356" rx="4" fill="#f5f7f4" stroke="#cbd3cd"/>
+  <g stroke="#cbd3cd">
+    <path d="M262 240h300M262 318h300M262 396h300M262 474h300"/>
+  </g>
+  <g fill="#19312b">
+    <rect x="288" y="190" width="120" height="11" rx="5"/>
+    <rect x="288" y="268" width="152" height="11" rx="5"/>
+    <rect x="288" y="346" width="98" height="11" rx="5"/>
+    <rect x="288" y="424" width="136" height="11" rx="5"/>
+  </g>
+  <g fill="#f26b52">
+    <circle cx="520" cy="196" r="7"/><circle cx="520" cy="274" r="7"/>
+  </g>
+  <rect x="590" y="162" width="298" height="356" rx="4" fill="#c9ded5"/>
+  <g fill="none" stroke="#fdfefd" stroke-width="12" opacity=".9">
+    <path d="M598 242c58-42 79 18 130-24s91-29 153 8"/>
+    <path d="M620 418c49-31 88-10 114-62s76-51 140-40"/>
+    <path d="M700 162c-12 86 30 112 14 194s14 121 42 162"/>
+  </g>
+  <circle cx="747" cy="316" r="18" fill="#f26b52" stroke="#fff" stroke-width="7"/>
+</svg>

@@ -1,0 +1,30 @@
+.theme-terminal {
+  --color-background: #f7fbf8;
+  --color-surface: #ffffff;
+  --color-surface-muted: #e7f2eb;
+  --color-text: #102016;
+  --color-text-muted: #4f6658;
+  --color-border: #bfd2c6;
+  --color-accent: #087f5b;
+  --color-accent-contrast: #ffffff;
+  --color-detail: #315f7a;
+  --font-body: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-heading: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-code: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --content-width: 74rem;
+  --article-width: 52rem;
+  --radius-small: 0.2rem;
+  --radius-medium: 0.3rem;
+}
+
+.theme-terminal[data-appearance="dark"] {
+  --color-background: #08110c;
+  --color-surface: #0e1913;
+  --color-surface-muted: #15251b;
+  --color-text: #e8fff0;
+  --color-text-muted: #a4c9b3;
+  --color-border: #2d4b39;
+  --color-accent: #56f09a;
+  --color-accent-contrast: #041008;
+  --color-detail: #87c4df;
+}

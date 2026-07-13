@@ -1,0 +1,58 @@
+---
+import { blogUrl } from "@core/urls";
+import type { BlogPost } from "@schema/normalize";
+import { ArrowUpRight } from "@lucide/astro";
+
+interface Props {
+  post: BlogPost;
+}
+
+const post = Astro.props.post;
+---
+
+<article class="card post-card">
+  {
+    post.cover && (
+      <a class="card-media" href={blogUrl(post.slug)} tabindex="-1">
+        <img src={post.cover.src} alt={post.cover.alt} loading="lazy" />
+      </a>
+    )
+  }
+  {
+    !post.cover && (
+      <p class="eyebrow">
+        {post.publishedAt.toLocaleDateString("en-US", {
+          dateStyle: "medium",
+          timeZone: "UTC",
+        })}
+      </p>
+    )
+  }
+  <div class="card-body">
+    {
+      post.cover && (
+        <p class="eyebrow">
+          {post.publishedAt.toLocaleDateString("en-US", {
+            dateStyle: "medium",
+            timeZone: "UTC",
+          })}{" "}
+          · {post.readingTime}
+        </p>
+      )
+    }
+    <h2><a href={blogUrl(post.slug)}>{post.title}</a></h2>
+    <p>{post.description}</p>
+    <div class="card-meta">
+      <ul class="tag-list" aria-label="Tags">
+        {post.tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+      <a
+        class="card-arrow"
+        href={blogUrl(post.slug)}
+        aria-label={`Read ${post.title}`}
+      >
+        <ArrowUpRight aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</article>

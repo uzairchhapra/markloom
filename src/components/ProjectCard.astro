@@ -1,0 +1,38 @@
+---
+import { projectUrl } from "@core/urls";
+import type { Project } from "@schema/normalize";
+import { ArrowUpRight } from "@lucide/astro";
+
+interface Props {
+  project: Project;
+}
+
+const project = Astro.props.project;
+---
+
+<article class="card project-card">
+  {
+    project.image && (
+      <a class="card-media" href={projectUrl(project.slug)} tabindex="-1">
+        <img src={project.image.src} alt={project.image.alt} loading="lazy" />
+      </a>
+    )
+  }
+  <div class="card-body">
+    <p class="eyebrow">Selected project</p>
+    <h2><a href={projectUrl(project.slug)}>{project.title}</a></h2>
+    <p>{project.description}</p>
+    <div class="card-meta">
+      <ul class="tag-list" aria-label="Project tags">
+        {project.tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+      <a
+        class="card-arrow"
+        href={projectUrl(project.slug)}
+        aria-label={`View ${project.title}`}
+      >
+        <ArrowUpRight aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</article>

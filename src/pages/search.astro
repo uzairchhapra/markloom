@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Search" description="Search projects, writing, and pages.">
+  <section class="section section-inner">
+    <div class="page-heading">
+      <p class="eyebrow">Search</p>
+      <h1>Search</h1>
+    </div>
+    <div id="search" class="search-shell">
+      <input
+        type="search"
+        placeholder="Search the site"
+        aria-label="Search the site"
+        data-search-input
+      />
+      <div data-search-results></div>
+    </div>
+  </section>
+  <script>
+    const input = document.querySelector<HTMLInputElement>(
+      "[data-search-input]",
+    );
+    const results = document.querySelector<HTMLElement>(
+      "[data-search-results]",
+    );
+    let pagefind:
+      | {
+          search: (query: string) => Promise<{
+            results: Array<{
+              data: () => Promise<{
+                url: string;
+                meta: { title?: string };
+                excerpt: string;
+              }>;
+            }>;
+          }>;
+        }
+      | undefined;
+    const pagefindPath = "/pagefind/pagefind.js";
+
+    input?.addEventListener("input", async () => {
+      if (!results || !input.value.trim()) {
+        if (results) results.innerHTML = "";
+        return;
+      }
+
+      pagefind ??= (await import(
+        /* @vite-ignore */ pagefindPath
+      )) as typeof pagefind;
+      if (!pagefind) return;
+      const search = await pagefind.search(input.value);
+      const data = await Promise.all(
+        search.results.slice(0, 10).map((result) => result.data()),
+      );
+      results.innerHTML = data
+        .map(
+          (item) =>
+            `<article class="search-result"><h2><a href="${item.url}">${item.meta.title ?? item.url}</a></h2><p>${item.excerpt}</p></article>`,
+        )
+        .join("");
+    });
+  </script>
+</BaseLayout>

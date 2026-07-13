@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { normalizePage } from "@schema/normalize";
+import type { CustomPage } from "@schema/normalize";
+
+interface Props {
+  entry: CollectionEntry<"pages">;
+  page: CustomPage;
+}
+
+export async function getStaticPaths() {
+  const entries: CollectionEntry<"pages">[] = await getCollection("pages");
+  return entries
+    .map((entry) => ({ entry, page: normalizePage(entry) }))
+    .filter(({ page }) => !page.draft)
+    .map(({ entry, page }) => ({
+      params: { slug: page.slug },
+      props: { entry, page },
+    }));
+}
+
+const { entry, page } = Astro.props as Props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  canonicalPath={`/${page.slug}/`}
+  noindex={page.noindex}
+>
+  <article class="section section-inner article-shell" data-pagefind-body>
+    <header class="article-header">
+      <p class="eyebrow">Page</p>
+      <h1>{page.title}</h1>
+      <p class="lede">{page.description}</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

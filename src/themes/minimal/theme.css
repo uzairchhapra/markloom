@@ -1,0 +1,30 @@
+.theme-minimal {
+  --color-background: #f7f8f6;
+  --color-surface: #ffffff;
+  --color-surface-muted: #e9ece8;
+  --color-text: #171a18;
+  --color-text-muted: #5f6761;
+  --color-border: #cfd5d0;
+  --color-accent: #c3382e;
+  --color-accent-contrast: #ffffff;
+  --color-detail: #245d7a;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-code: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  --content-width: 78rem;
+  --article-width: 50rem;
+  --radius-small: 0.25rem;
+  --radius-medium: 0.4rem;
+}
+
+.theme-minimal[data-appearance="dark"] {
+  --color-background: #111411;
+  --color-surface: #181c18;
+  --color-surface-muted: #202720;
+  --color-text: #f2f4ef;
+  --color-text-muted: #aeb7af;
+  --color-border: #394139;
+  --color-accent: #ff7366;
+  --color-accent-contrast: #1b0a08;
+  --color-detail: #8bc8e5;
+}

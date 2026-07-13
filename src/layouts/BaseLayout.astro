@@ -1,0 +1,90 @@
+---
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import MermaidSupport from "@components/MermaidSupport.astro";
+import ThemeToggle from "@components/ThemeToggle.astro";
+import { loadMarkloomConfig } from "@config/load";
+import { joinUrl } from "@core/urls";
+import "@fontsource/barlow-condensed/600.css";
+import "@fontsource/barlow-condensed/700.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@styles/global.css";
+import "@themes/minimal/theme.css";
+import "@themes/editorial/theme.css";
+import "@themes/terminal/theme.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+  hasMermaid?: boolean;
+}
+
+const config = await loadMarkloomConfig();
+const pageTitle = Astro.props.title
+  ? `${Astro.props.title} | ${config.site.title}`
+  : config.site.title;
+const description = Astro.props.description ?? config.site.description;
+const canonical = joinUrl(
+  config.site.url,
+  Astro.props.canonicalPath ?? Astro.url.pathname,
+);
+const themeName = config.site.theme;
+---
+
+<!doctype html>
+<html
+  lang={config.site.language}
+  data-theme-mode={config.theme.appearance}
+  class={`theme-${themeName}`}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {Astro.props.noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      (() => {
+        const key = "markloom-appearance";
+        const stored = localStorage.getItem(key);
+        const configured =
+          document.documentElement.dataset.themeMode || "system";
+        const mode = stored || configured;
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        document.documentElement.dataset.appearance =
+          mode === "system" ? (prefersDark ? "dark" : "light") : mode;
+        document.documentElement.dataset.themeMode = mode;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <Header
+      navigation={config.navigation.items}
+      siteTitle={config.site.title}
+      currentPath={Astro.url.pathname}
+    >
+      <ThemeToggle />
+    </Header>
+    <main id="content">
+      <slot />
+    </main>
+    <Footer site={config.site} social={config.social.links} />
+    {Astro.props.hasMermaid && <MermaidSupport />}
+  </body>
+</html>

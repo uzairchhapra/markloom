@@ -1,0 +1,42 @@
+<script>
+  const diagrams = [
+    ...document.querySelectorAll<HTMLElement>("pre > code.language-mermaid"),
+  ];
+
+  if (diagrams.length > 0) {
+    const { default: mermaid } = await import("mermaid");
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "strict",
+      theme:
+        document.documentElement.dataset.appearance === "dark"
+          ? "dark"
+          : "default",
+    });
+
+    await Promise.all(
+      diagrams.map(async (code, index) => {
+        const source = code.textContent ?? "";
+        const wrapper = document.createElement("div");
+        wrapper.className = "mermaid-frame";
+        wrapper.setAttribute("data-pagefind-ignore", "all");
+
+        try {
+          const result = await mermaid.render(
+            `markloom-mermaid-${index}`,
+            source,
+          );
+          wrapper.innerHTML = result.svg;
+        } catch (error) {
+          wrapper.classList.add("mermaid-error");
+          wrapper.textContent =
+            error instanceof Error
+              ? error.message
+              : "Unable to render Mermaid diagram.";
+        }
+
+        code.parentElement?.replaceWith(wrapper);
+      }),
+    );
+  }
+</script>

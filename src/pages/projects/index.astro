@@ -1,0 +1,19 @@
+---
+import ProjectCard from "@components/ProjectCard.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getProjects } from "@core/content";
+
+const projects = await getProjects();
+---
+
+<BaseLayout title="Projects" description="Selected projects and case studies.">
+  <section class="section section-inner">
+    <div class="page-heading">
+      <p class="eyebrow">Projects</p>
+      <h1>Selected Work</h1>
+    </div>
+    <div class="card-grid">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</BaseLayout>

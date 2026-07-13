@@ -1,0 +1,94 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import {
+  findRelatedPosts,
+  getPublishedPosts,
+  isPublishable,
+} from "@core/content";
+import { detectMermaid } from "@core/mermaid";
+import { blogUrl } from "@core/urls";
+import { normalizeBlogPost } from "@schema/normalize";
+import type { BlogPost } from "@schema/normalize";
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+  post: BlogPost;
+}
+
+export async function getStaticPaths() {
+  const entries: CollectionEntry<"blog">[] = await getCollection("blog");
+  return entries
+    .map((entry) => ({ entry, post: normalizeBlogPost(entry) }))
+    .filter(({ post }) => isPublishable(post))
+    .map(({ entry, post }) => ({
+      params: { slug: post.slug },
+      props: { entry, post },
+    }));
+}
+
+const { entry, post } = Astro.props as Props;
+const { Content, headings } = await render(entry);
+const posts = await getPublishedPosts();
+const related = findRelatedPosts(post, posts);
+const hasMermaid = detectMermaid(entry.body ?? "");
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  canonicalPath={blogUrl(post.slug)}
+  noindex={post.noindex}
+  hasMermaid={hasMermaid}
+>
+  <article class="section section-inner article-shell" data-pagefind-body>
+    <header class="article-header">
+      <p class="eyebrow">
+        {
+          post.publishedAt.toLocaleDateString("en-US", {
+            dateStyle: "long",
+            timeZone: "UTC",
+          })
+        } · {post.readingTime}
+      </p>
+      <h1>{post.title}</h1>
+      <p class="lede">{post.description}</p>
+    </header>
+    {
+      headings.length > 0 && (
+        <aside class="toc" aria-label="Table of contents">
+          <h2>Contents</h2>
+          <ol>
+            {headings
+              .filter(
+                (heading: (typeof headings)[number]) => heading.depth === 2,
+              )
+              .map((heading: (typeof headings)[number]) => (
+                <li>
+                  <a href={`#${heading.slug}`}>{heading.text}</a>
+                </li>
+              ))}
+          </ol>
+        </aside>
+      )
+    }
+    <div class="prose">
+      <Content />
+    </div>
+    {
+      related.length > 0 && (
+        <footer class="related-posts">
+          <h2>Related posts</h2>
+          <ul>
+            {related.map((item) => (
+              <li>
+                <a href={blogUrl(item.slug)}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
+        </footer>
+      )
+    }
+  </article>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+interface NavigationItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  navigation: NavigationItem[];
+  siteTitle: string;
+  currentPath: string;
+}
+
+const isCurrent = (href: string) =>
+  href === "/"
+    ? Astro.props.currentPath === href
+    : Astro.props.currentPath.startsWith(href);
+---
+
+<header class="site-header">
+  <nav class="site-nav" aria-label="Primary">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">//</span>{
+        Astro.props.siteTitle
+      }
+    </a>
+    <div class="nav-links">
+      {
+        Astro.props.navigation.map((item) => (
+          <a
+            href={item.href}
+            class="nav-link"
+            aria-current={isCurrent(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+    <slot />
+  </nav>
+</header>

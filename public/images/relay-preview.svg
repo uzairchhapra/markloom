@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Relay Energy operations workspace</title>
+  <desc id="desc">A solar installation workspace with project milestones, progress, and account health.</desc>
+  <rect width="960" height="600" fill="#dde7ee"/>
+  <rect x="32" y="30" width="896" height="540" rx="8" fill="#fbfcfd" stroke="#98a9b6" stroke-width="2"/>
+  <rect x="32" y="30" width="896" height="72" rx="8" fill="#172b3d"/>
+  <path d="M68 60h26l13 22H55z" fill="#ffd14a"/>
+  <path d="M130 61h144M130 77h90" stroke="#e8f0f5" stroke-width="8"/>
+  <circle cx="875" cy="66" r="17" fill="#8ac6e8"/>
+  <path d="M74 148h300M74 176h196" stroke="#172b3d" stroke-width="14"/>
+  <g>
+    <rect x="74" y="224" width="812" height="100" rx="5" fill="#eef3f6"/>
+    <rect x="74" y="340" width="812" height="100" rx="5" fill="#eef3f6"/>
+    <rect x="74" y="456" width="812" height="74" rx="5" fill="#eef3f6"/>
+  </g>
+  <g fill="#172b3d">
+    <rect x="100" y="250" width="144" height="12" rx="6"/>
+    <rect x="100" y="366" width="112" height="12" rx="6"/>
+    <rect x="100" y="482" width="162" height="12" rx="6"/>
+  </g>
+  <g fill="#8498a7">
+    <rect x="100" y="280" width="224" height="9" rx="4"/>
+    <rect x="100" y="396" width="184" height="9" rx="4"/>
+    <rect x="100" y="509" width="132" height="8" rx="4"/>
+  </g>
+  <g fill="#cad6dd">
+    <rect x="390" y="256" width="300" height="12" rx="6"/>
+    <rect x="390" y="372" width="300" height="12" rx="6"/>
+    <rect x="390" y="488" width="300" height="12" rx="6"/>
+  </g>
+  <g fill="#2a7f62">
+    <rect x="390" y="256" width="225" height="12" rx="6"/>
+    <rect x="390" y="372" width="152" height="12" rx="6"/>
+    <rect x="390" y="488" width="268" height="12" rx="6"/>
+  </g>
+  <g fill="#ffd14a" stroke="#172b3d" stroke-width="3">
+    <circle cx="810" cy="273" r="18"/><circle cx="810" cy="389" r="18"/>
+  </g>
+  <circle cx="810" cy="496" r="18" fill="#8ac6e8" stroke="#172b3d" stroke-width="3"/>
+</svg>
