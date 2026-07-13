@@ -1,5 +1,5 @@
 ---
-import { projectUrl } from "@core/urls";
+import { projectUrl, sitePath } from "@core/urls";
 import type { Project } from "@schema/normalize";
 import { ArrowUpRight } from "@lucide/astro";
 
@@ -14,7 +14,11 @@ const project = Astro.props.project;
   {
     project.image && (
       <a class="card-media" href={projectUrl(project.slug)} tabindex="-1">
-        <img src={project.image.src} alt={project.image.alt} loading="lazy" />
+        <img
+          src={sitePath(project.image.src)}
+          alt={project.image.alt}
+          loading="lazy"
+        />
       </a>
     )
   }

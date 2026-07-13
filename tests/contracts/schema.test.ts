@@ -1,4 +1,9 @@
-import { blogSchema, projectSchema, siteConfigSchemaV1 } from "@schema/current";
+import {
+  blogSchema,
+  markloomConfigSchemaV1,
+  projectSchema,
+  siteConfigSchemaV1,
+} from "@schema/current";
 
 describe("public schemas", () => {
   it("accepts minimal valid blog frontmatter", () => {
@@ -51,6 +56,43 @@ describe("public schemas", () => {
       url: "https://example.com",
       theme: "neon",
     });
+    expect(parsed.success).toBe(false);
+  });
+
+  it("accepts the aggregate v1 Markloom configuration", () => {
+    expect(
+      markloomConfigSchemaV1.parse({
+        schemaVersion: 1,
+        site: {
+          title: "Site",
+          description: "Description",
+          url: "https://example.com",
+        },
+        navigation: {},
+        social: {},
+        theme: {},
+      }),
+    ).toMatchObject({
+      schemaVersion: 1,
+      site: { schemaVersion: 1 },
+      navigation: { items: [] },
+      social: { links: [] },
+      theme: { appearance: "system", accent: "#2563eb" },
+    });
+  });
+
+  it("requires the aggregate configuration schema version", () => {
+    const parsed = markloomConfigSchemaV1.safeParse({
+      site: {
+        title: "Site",
+        description: "Description",
+        url: "https://example.com",
+      },
+      navigation: {},
+      social: {},
+      theme: {},
+    });
+
     expect(parsed.success).toBe(false);
   });
 });

@@ -20,10 +20,12 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm format:check
+      - run: pnpm validate
       - run: pnpm lint
       - run: pnpm check
       - run: pnpm test
       - run: pnpm fixtures:build
+      - run: pnpm build
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e --project=chromium
 

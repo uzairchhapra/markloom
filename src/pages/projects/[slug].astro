@@ -2,7 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { projectUrl } from "@core/urls";
+import { projectUrl, sitePath } from "@core/urls";
 import { normalizeProject } from "@schema/normalize";
 import type { Project } from "@schema/normalize";
 import { CodeXml, ExternalLink } from "@lucide/astro";
@@ -58,7 +58,7 @@ const { Content } = await render(entry);
     {
       project.image && (
         <figure class="project-hero-media">
-          <img src={project.image.src} alt={project.image.alt} />
+          <img src={sitePath(project.image.src)} alt={project.image.alt} />
         </figure>
       )
     }

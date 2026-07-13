@@ -32,6 +32,7 @@ async function main() {
     console.log(`Building fixture: ${fixtureDir}`);
     const fixtureName = basename(fixtureDir);
     const outDir = join("dist-fixtures", fixtureName);
+    const publicUrl = `https://fixtures.example/${fixtureName}/`;
 
     await runPnpm(["run", "build"], {
       env: {
@@ -40,6 +41,7 @@ async function main() {
         MARKLOOM_CONFIG_DIR: join(fixtureDir, "config"),
         MARKLOOM_CACHE_DIR: join(".markloom-cache", "fixtures", fixtureName),
         MARKLOOM_OUT_DIR: outDir,
+        MARKLOOM_PUBLIC_URL: publicUrl,
       },
     });
 
@@ -48,6 +50,26 @@ async function main() {
         `Fixture ${fixtureName} did not produce a Pagefind index`,
       );
     });
+
+    const [home, search, sitemap, rss] = await Promise.all([
+      readFile(join(outDir, "index.html"), "utf8"),
+      readFile(join(outDir, "search", "index.html"), "utf8"),
+      readFile(join(outDir, "sitemap-0.xml"), "utf8"),
+      readFile(join(outDir, "rss.xml"), "utf8"),
+    ]);
+    const basePath = `/${fixtureName}/`;
+
+    if (!home.includes(`href="${basePath}"`)) {
+      throw new Error(`Fixture ${fixtureName} did not prefix internal links`);
+    }
+    if (!search.includes(`${basePath}pagefind/pagefind.js`)) {
+      throw new Error(`Fixture ${fixtureName} did not prefix Pagefind`);
+    }
+    if (!sitemap.includes(publicUrl) || !rss.includes(publicUrl)) {
+      throw new Error(
+        `Fixture ${fixtureName} emitted inconsistent public URLs`,
+      );
+    }
   }
 
   console.log(`Built ${validFixtures.length} valid fixture(s).`);

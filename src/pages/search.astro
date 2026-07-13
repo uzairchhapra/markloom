@@ -1,5 +1,9 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { sitePath } from "@core/urls";
+
+const pagefindPath = sitePath("/pagefind/pagefind.js");
+const pagefindBase = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Search" description="Search projects, writing, and pages.">
@@ -8,7 +12,12 @@ import BaseLayout from "@layouts/BaseLayout.astro";
       <p class="eyebrow">Search</p>
       <h1>Search</h1>
     </div>
-    <div id="search" class="search-shell">
+    <div
+      id="search"
+      class="search-shell"
+      data-pagefind-path={pagefindPath}
+      data-pagefind-base={pagefindBase}
+    >
       <input
         type="search"
         placeholder="Search the site"
@@ -25,6 +34,9 @@ import BaseLayout from "@layouts/BaseLayout.astro";
     const results = document.querySelector<HTMLElement>(
       "[data-search-results]",
     );
+    const searchRoot = document.querySelector<HTMLElement>(
+      "[data-pagefind-path]",
+    );
     let pagefind:
       | {
           search: (query: string) => Promise<{
@@ -36,9 +48,11 @@ import BaseLayout from "@layouts/BaseLayout.astro";
               }>;
             }>;
           }>;
+          options: (options: { baseUrl: string }) => Promise<void>;
         }
       | undefined;
-    const pagefindPath = "/pagefind/pagefind.js";
+    const pagefindPath = searchRoot?.dataset.pagefindPath;
+    const pagefindBase = searchRoot?.dataset.pagefindBase ?? "/";
 
     input?.addEventListener("input", async () => {
       if (!results || !input.value.trim()) {
@@ -46,10 +60,12 @@ import BaseLayout from "@layouts/BaseLayout.astro";
         return;
       }
 
+      if (!pagefindPath) return;
       pagefind ??= (await import(
         /* @vite-ignore */ pagefindPath
       )) as typeof pagefind;
       if (!pagefind) return;
+      await pagefind.options({ baseUrl: pagefindBase });
       const search = await pagefind.search(input.value);
       const data = await Promise.all(
         search.results.slice(0, 10).map((result) => result.data()),

@@ -5,6 +5,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 import { getProjects, getPublishedPosts } from "@core/content";
 import { ArrowDownRight } from "@lucide/astro";
+import { sitePath } from "@core/urls";
 
 const [homeEntries, authors, experience] = await Promise.all([
   getCollection("home"),
@@ -41,7 +42,7 @@ const year = (date?: Date) => date?.getUTCFullYear() ?? "Present";
         </p>
         {
           home?.data.cta && (
-            <a class="button" href={home.data.cta.href}>
+            <a class="button" href={sitePath(home.data.cta.href)}>
               {home.data.cta.label}{" "}
               <ArrowDownRight size={15} aria-hidden="true" />
             </a>
@@ -80,7 +81,7 @@ const year = (date?: Date) => date?.getUTCFullYear() ?? "Present";
           <p class="eyebrow">Work / 01</p>
           <h2>Selected projects</h2>
         </div>
-        <a class="section-link" href="/projects/">All projects →</a>
+        <a class="section-link" href={sitePath("/projects/")}>All projects →</a>
       </div>
       <div class="card-grid">
         {projects.map((project) => <ProjectCard project={project} />)}
@@ -129,7 +130,7 @@ const year = (date?: Date) => date?.getUTCFullYear() ?? "Present";
           <p class="eyebrow">Notes / 03</p>
           <h2>Recent writing</h2>
         </div>
-        <a class="section-link" href="/blog/">All writing →</a>
+        <a class="section-link" href={sitePath("/blog/")}>All writing →</a>
       </div>
       <div class="stack">
         {posts.map((post) => <PostCard post={post} />)}

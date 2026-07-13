@@ -4,6 +4,7 @@ import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { normalizePage } from "@schema/normalize";
 import type { CustomPage } from "@schema/normalize";
+import { sitePath } from "@core/urls";
 
 interface Props {
   entry: CollectionEntry<"pages">;
@@ -28,7 +29,7 @@ const { Content } = await render(entry);
 <BaseLayout
   title={page.title}
   description={page.description}
-  canonicalPath={`/${page.slug}/`}
+  canonicalPath={sitePath(`/${page.slug}/`)}
   noindex={page.noindex}
 >
   <article class="section section-inner article-shell" data-pagefind-body>
