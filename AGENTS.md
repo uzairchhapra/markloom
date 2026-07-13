@@ -47,10 +47,25 @@ the same core logic as the Astro renderer.
   and WCAG AA contrast.
 - Keep changes scoped. Do not rewrite unrelated user work in a dirty tree.
 
+## Git Workflow
+
+- Never work or commit directly on `main`. Before editing, confirm the current
+  branch and create or switch to a focused feature branch when needed. Codex
+  branches must use the `codex/` prefix.
+- Never push directly to `main`. Push the feature branch and merge changes only
+  through a pull request.
+- Keep each branch focused on one coherent change and bring it up to date with
+  `main` before opening or updating its pull request.
+- Use the pull request template and complete every applicable checklist item.
+
 ## Verification
 
-Run checks proportionate to the change. Before committing shared or user-facing
-work, run the full local gate:
+Before every commit, kick off a dedicated verification subagent to run the full
+local gate from the current working tree. The primary agent must not commit
+until that subagent reports every command passing. If subagent tooling is
+unavailable, stop and tell the user instead of bypassing this requirement.
+
+The verification subagent must run:
 
 ```bash
 corepack pnpm format:check
@@ -60,14 +75,12 @@ corepack pnpm check
 corepack pnpm test
 corepack pnpm fixtures:build
 corepack pnpm build
+corepack pnpm test:e2e --project=chromium
 ```
 
-For UI or routing changes, also run Chromium smoke and accessibility tests:
-
-```bash
-corepack pnpm exec playwright test --project=chromium \
-  tests/e2e/smoke.spec.ts tests/accessibility/home.spec.ts
-```
+The primary agent may run targeted checks while implementing, but those checks
+do not replace the independent pre-commit subagent run. Fix every failure and
+restart the complete subagent verification before committing.
 
 ## Commits And Releases
 
