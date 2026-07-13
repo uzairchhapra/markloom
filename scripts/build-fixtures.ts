@@ -1,9 +1,7 @@
-import { execFile } from "node:child_process";
-import { readdir, readFile } from "node:fs/promises";
+import { access, readdir, readFile } from "node:fs/promises";
 import { basename, join } from "node:path";
-import { promisify } from "node:util";
 
-const execFileAsync = promisify(execFile);
+import { runPnpm } from "./run-pnpm";
 
 interface FixtureManifest {
   valid: boolean;
@@ -33,25 +31,23 @@ async function main() {
   for (const fixtureDir of validFixtures) {
     console.log(`Building fixture: ${fixtureDir}`);
     const fixtureName = basename(fixtureDir);
-    const command = process.env.npm_execpath ?? "corepack";
-    const args = process.env.npm_execpath
-      ? [process.env.npm_execpath, "build"]
-      : ["pnpm", "build"];
+    const outDir = join("dist-fixtures", fixtureName);
 
-    await execFileAsync(
-      process.env.npm_execpath ? process.execPath : command,
-      args,
-      {
-        env: {
-          ...process.env,
-          MARKLOOM_CONTENT_DIR: join(fixtureDir, "content"),
-          MARKLOOM_CONFIG_DIR: join(fixtureDir, "config"),
-          MARKLOOM_CACHE_DIR: join(".markloom-cache", "fixtures", fixtureName),
-          MARKLOOM_OUT_DIR: join("dist-fixtures", fixtureName),
-        },
-        maxBuffer: 1024 * 1024 * 20,
+    await runPnpm(["run", "build"], {
+      env: {
+        ...process.env,
+        MARKLOOM_CONTENT_DIR: join(fixtureDir, "content"),
+        MARKLOOM_CONFIG_DIR: join(fixtureDir, "config"),
+        MARKLOOM_CACHE_DIR: join(".markloom-cache", "fixtures", fixtureName),
+        MARKLOOM_OUT_DIR: outDir,
       },
-    );
+    });
+
+    await access(join(outDir, "pagefind", "pagefind.js")).catch(() => {
+      throw new Error(
+        `Fixture ${fixtureName} did not produce a Pagefind index`,
+      );
+    });
   }
 
   console.log(`Built ${validFixtures.length} valid fixture(s).`);

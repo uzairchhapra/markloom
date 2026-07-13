@@ -7,7 +7,7 @@
   "packageManager": "pnpm@10.13.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "node --import tsx scripts/build-site.ts",
     "preview": "astro preview",
     "check": "astro sync && astro check && tsc --noEmit",
     "lint": "eslint .",
@@ -15,8 +15,9 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test tests/e2e tests/accessibility",
     "test:a11y": "playwright test tests/accessibility",
+    "test:visual": "playwright test tests/visual",
     "fixtures:build": "node --import tsx scripts/build-fixtures.ts",
     "validate": "node --import tsx scripts/validate-site.ts"
   },
