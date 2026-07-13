@@ -4,6 +4,7 @@ export { experienceSchemaV1 as experienceSchema } from "./v1/experience";
 export { pageSchemaV1 as pageSchema } from "./v1/page";
 export { projectSchemaV1 as projectSchema } from "./v1/project";
 export {
+  markloomConfigSchemaV1,
   navigationConfigSchemaV1,
   siteConfigSchemaV1,
   socialConfigSchemaV1,
@@ -17,6 +18,7 @@ export type { ExperienceFrontmatterV1 as ExperienceFrontmatter } from "./v1/expe
 export type { PageFrontmatterV1 as PageFrontmatter } from "./v1/page";
 export type { ProjectFrontmatterV1 as ProjectFrontmatter } from "./v1/project";
 export type {
+  MarkloomConfigV1 as MarkloomConfig,
   NavigationConfigV1 as NavigationConfig,
   SiteConfigV1 as SiteConfig,
   SocialConfigV1 as SocialConfig,

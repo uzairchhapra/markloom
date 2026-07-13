@@ -3,7 +3,7 @@
 ## Project
 
 Markloom is a Markdown-native Astro website engine. Authors work in
-`content/`, `config/`, and `public/`; engine contributors work in `src/`.
+`markloom.yaml`, `content/`, and `public/`; engine contributors work in `src/`.
 Keep those two surfaces separate so a site can upgrade without rewriting its
 content.
 
@@ -33,6 +33,10 @@ fixtures under `fixtures/` exercise other supported site shapes and themes.
 Keep publishing rules out of page components. Themes should consume normalized
 models instead of raw content entries. Future CLI and MCP adapters must reuse
 the same core logic as the Astro renderer.
+
+`markloom.yaml` is the canonical configuration source. Split files under
+`config/` are a schema version 1 compatibility surface and must not become a
+second source of truth.
 
 ## Editing Rules
 

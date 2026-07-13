@@ -39,8 +39,17 @@ export const themeConfigSchemaV1 = z.object({
   accent: z.string().default("#2563eb"),
 });
 
+export const markloomConfigSchemaV1 = z.object({
+  schemaVersion: z.literal(1),
+  site: siteConfigSchemaV1,
+  navigation: navigationConfigSchemaV1.default({}),
+  social: socialConfigSchemaV1.default({}),
+  theme: themeConfigSchemaV1.default({}),
+});
+
 export type SiteConfigV1 = z.infer<typeof siteConfigSchemaV1>;
 export type NavigationConfigV1 = z.infer<typeof navigationConfigSchemaV1>;
 export type SocialConfigV1 = z.infer<typeof socialConfigSchemaV1>;
 export type ThemeConfigV1 = z.infer<typeof themeConfigSchemaV1>;
+export type MarkloomConfigV1 = z.infer<typeof markloomConfigSchemaV1>;
 export type ThemeName = z.infer<typeof themeNameSchema>;

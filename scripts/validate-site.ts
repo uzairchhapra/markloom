@@ -1,16 +1,10 @@
 import { readdir, readFile } from "node:fs/promises";
-import { join, relative } from "node:path";
+import { dirname, join, relative } from "node:path";
 import matter from "gray-matter";
-import YAML from "yaml";
+import { ZodError } from "zod";
+import { loadMarkloomConfig } from "../src/config/load";
 import { validateMermaidBlocks } from "../src/core/mermaid";
-import {
-  blogSchema,
-  navigationConfigSchemaV1,
-  projectSchema,
-  siteConfigSchemaV1,
-  socialConfigSchemaV1,
-  themeConfigSchemaV1,
-} from "../src/schema/current";
+import { blogSchema, projectSchema } from "../src/schema/current";
 
 interface ValidationIssue {
   file: string;
@@ -30,27 +24,28 @@ async function findMarkdownFiles(dir: string): Promise<string[]> {
   return files.flat();
 }
 
-async function validateYaml(
-  file: string,
-  schema: {
-    safeParse: (value: unknown) => {
-      success: boolean;
-      error?: {
-        issues: Array<{ path: Array<string | number>; message: string }>;
-      };
-    };
-  },
-  issues: ValidationIssue[],
-) {
-  const value = YAML.parse(await readFile(file, "utf8"));
-  const parsed = schema.safeParse(value);
-  if (!parsed.success) {
-    for (const issue of parsed.error?.issues ?? []) {
-      issues.push({
-        file,
-        message: `${issue.path.join(".") || "root"}: ${issue.message}`,
-      });
+async function validateConfig(configDir: string, issues: ValidationIssue[]) {
+  try {
+    await loadMarkloomConfig(configDir);
+  } catch (error) {
+    const file =
+      process.env.MARKLOOM_CONFIG_FILE ??
+      join(dirname(configDir), "markloom.yaml or config/*.yaml");
+
+    if (error instanceof ZodError) {
+      for (const issue of error.issues) {
+        issues.push({
+          file,
+          message: `${issue.path.join(".") || "root"}: ${issue.message}`,
+        });
+      }
+      return;
     }
+
+    issues.push({
+      file,
+      message: error instanceof Error ? error.message : String(error),
+    });
   }
 }
 
@@ -102,14 +97,7 @@ async function main() {
   const issues: ValidationIssue[] = [];
 
   await Promise.all([
-    validateYaml(join(configDir, "site.yaml"), siteConfigSchemaV1, issues),
-    validateYaml(
-      join(configDir, "navigation.yaml"),
-      navigationConfigSchemaV1,
-      issues,
-    ),
-    validateYaml(join(configDir, "social.yaml"), socialConfigSchemaV1, issues),
-    validateYaml(join(configDir, "theme.yaml"), themeConfigSchemaV1, issues),
+    validateConfig(configDir, issues),
     validateCollection(contentDir, "blog", blogSchema, issues),
     validateCollection(contentDir, "projects", projectSchema, issues),
   ]);
