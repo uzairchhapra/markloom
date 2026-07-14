@@ -7,6 +7,8 @@ import { loadMarkloomConfig } from "@config/load";
 import { joinUrl, sitePath } from "@core/urls";
 import "@fontsource/barlow-condensed/600.css";
 import "@fontsource/barlow-condensed/700.css";
+import "@fontsource/courier-prime/400.css";
+import "@fontsource/courier-prime/700.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "@fontsource/ibm-plex-mono/600.css";
 import "@fontsource/ibm-plex-sans/400.css";
@@ -16,6 +18,7 @@ import "@styles/global.css";
 import "@themes/minimal/theme.css";
 import "@themes/editorial/theme.css";
 import "@themes/terminal/theme.css";
+import type { ThemeName } from "@schema/current";
 
 interface Props {
   title?: string;
@@ -23,6 +26,7 @@ interface Props {
   canonicalPath?: string;
   noindex?: boolean;
   hasMermaid?: boolean;
+  theme?: ThemeName;
 }
 
 const config = await loadMarkloomConfig();
@@ -35,7 +39,7 @@ const canonical = joinUrl(
   publicRoot,
   Astro.props.canonicalPath ?? Astro.url.pathname,
 );
-const themeName = config.site.theme;
+const themeName = Astro.props.theme ?? config.site.theme;
 const navigation = config.navigation.items.map((item) => ({
   ...item,
   href: sitePath(item.href),

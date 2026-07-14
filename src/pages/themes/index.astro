@@ -1,0 +1,72 @@
+---
+import { getProjects } from "@core/content";
+import { sitePath } from "@core/urls";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { ArrowUpRight } from "@lucide/astro";
+import { themes } from "@themes/index";
+
+const themeList = Object.values(themes);
+const [project] = await getProjects();
+---
+
+<BaseLayout
+  title="Themes"
+  description="Preview the John Doe portfolio in every bundled Markloom theme."
+>
+  <section class="section section-inner themes-page">
+    <header class="themes-heading">
+      <p class="eyebrow">Theme gallery</p>
+      <h1>One portfolio, three visual systems.</h1>
+      <p class="lede">
+        Every example uses John Doe’s exact content. Only the typography, color,
+        and interface character change.
+      </p>
+    </header>
+    <div class="theme-gallery">
+      {
+        themeList.map((theme) => (
+          <a
+            class={`theme-sample theme-${theme.name}`}
+            data-appearance="light"
+            href={sitePath(`/themes/${theme.name}/`)}
+            aria-label={`Open the ${theme.label} theme example`}
+          >
+            <div class="theme-sample-preview">
+              <div class="theme-sample-chrome">
+                <span class="theme-sample-brand">
+                  <span aria-hidden="true">//</span> John Doe
+                </span>
+                <span class="theme-sample-index">01 / 03</span>
+              </div>
+              <div class="theme-sample-content">
+                <p class="theme-sample-kicker">Independent product engineer</p>
+                <h2>John Doe makes complex products feel clear.</h2>
+                {project?.image && (
+                  <img
+                    src={sitePath(project.image.src)}
+                    alt=""
+                    loading="lazy"
+                  />
+                )}
+              </div>
+            </div>
+            <div class="theme-sample-caption">
+              <div>
+                <div class="theme-swatches" aria-hidden="true">
+                  <span class="theme-swatch theme-swatch-text" />
+                  <span class="theme-swatch theme-swatch-accent" />
+                  <span class="theme-swatch theme-swatch-detail" />
+                </div>
+                <h2>{theme.label}</h2>
+                <p>{theme.description}</p>
+              </div>
+              <span class="theme-sample-action">
+                Open example <ArrowUpRight size={17} aria-hidden="true" />
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

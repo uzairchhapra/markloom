@@ -1,0 +1,37 @@
+---
+import { sitePath } from "@core/urls";
+import type { ThemeName } from "@schema/current";
+import { themes } from "@themes/index";
+import { ArrowLeft } from "@lucide/astro";
+
+interface Props {
+  activeTheme: ThemeName;
+}
+
+const activeTheme = Astro.props.activeTheme;
+const themeList = Object.values(themes);
+---
+
+<aside class="theme-preview-bar" aria-label="Theme preview controls">
+  <div class="theme-preview-inner">
+    <a class="theme-preview-back" href={sitePath("/themes/")}>
+      <ArrowLeft size={15} aria-hidden="true" />
+      All themes
+    </a>
+    <p>
+      Viewing <strong>{themes[activeTheme].label}</strong>
+    </p>
+    <nav class="theme-preview-links" aria-label="Preview another theme">
+      {
+        themeList.map((theme) => (
+          <a
+            href={sitePath(`/themes/${theme.name}/`)}
+            aria-current={theme.name === activeTheme ? "page" : undefined}
+          >
+            {theme.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</aside>

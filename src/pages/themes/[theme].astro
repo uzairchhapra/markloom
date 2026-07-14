@@ -1,0 +1,20 @@
+---
+import HomePage from "@components/HomePage.astro";
+import type { ThemeName } from "@schema/current";
+import { themes } from "@themes/index";
+
+export function getStaticPaths() {
+  return Object.values(themes).map((theme) => ({
+    params: { theme: theme.name },
+    props: { theme: theme.name },
+  }));
+}
+
+interface Props {
+  theme: ThemeName;
+}
+
+const { theme } = Astro.props;
+---
+
+<HomePage theme={theme} previewTheme={theme} />

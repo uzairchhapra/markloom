@@ -26,6 +26,7 @@
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.2",
     "@fontsource/barlow-condensed": "^5.2.8",
+    "@fontsource/courier-prime": "^5.2.8",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/ibm-plex-sans": "^5.2.8",
     "@lucide/astro": "^1.24.0",
