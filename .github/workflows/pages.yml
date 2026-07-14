@@ -18,8 +18,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
         with:
           version: 10.13.1
       - uses: actions/setup-node@v6
@@ -29,13 +29,13 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Configure GitHub Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Build Markloom
         run: pnpm build
         env:
           MARKLOOM_PUBLIC_URL: ${{ steps.pages.outputs.base_url }}
       - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
