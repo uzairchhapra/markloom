@@ -8,9 +8,9 @@
   --color-accent: #087f5b;
   --color-accent-contrast: #ffffff;
   --color-detail: #315f7a;
-  --font-body: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  --font-heading: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  --font-code: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-body: "Courier Prime", "Courier New", Courier, monospace;
+  --font-heading: "Courier Prime", "Courier New", Courier, monospace;
+  --font-code: "Courier Prime", "Courier New", Courier, monospace;
   --content-width: 74rem;
   --article-width: 52rem;
   --radius-small: 0.2rem;

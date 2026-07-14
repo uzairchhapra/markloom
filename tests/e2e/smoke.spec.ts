@@ -95,5 +95,12 @@ for (const theme of ["minimal", "editorial", "terminal"] as const) {
     await expect(
       page.locator(`.theme-preview-links a[href$="/${theme}/"]`),
     ).toHaveAttribute("aria-current", "page");
+
+    if (theme === "terminal") {
+      const fontFamily = await page
+        .getByRole("heading", { name: /john doe makes/i })
+        .evaluate((element) => window.getComputedStyle(element).fontFamily);
+      expect(fontFamily).toContain("Courier Prime");
+    }
   });
 }

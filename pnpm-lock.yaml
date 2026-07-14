@@ -19,6 +19,9 @@ importers:
       "@fontsource/barlow-condensed":
         specifier: ^5.2.8
         version: 5.2.8
+      "@fontsource/courier-prime":
+        specifier: ^5.2.8
+        version: 5.2.8
       "@fontsource/ibm-plex-mono":
         specifier: ^5.2.7
         version: 5.2.7
@@ -1076,6 +1079,12 @@ packages:
     resolution:
       {
         integrity: sha512-cmCWNfh7oCmfarGDlhiJRkl4HOgt9aOqki7IYtDOaI3qLCeEO/8VjiZeAx/2PEPf4K36YxXDjAlOWwW/anQUZA==,
+      }
+
+  "@fontsource/courier-prime@5.2.8":
+    resolution:
+      {
+        integrity: sha512-M3xOCcXnGuFi9TcGCrz4hm5yeWg4Sn35MALRLPnqNoHhawTFvhyi2KSI2+5RyFtDNJrb58bPh8LLipgiI9KA0w==,
       }
 
   "@fontsource/ibm-plex-mono@5.2.7":
@@ -6548,6 +6557,8 @@ snapshots:
       levn: 0.4.1
 
   "@fontsource/barlow-condensed@5.2.8": {}
+
+  "@fontsource/courier-prime@5.2.8": {}
 
   "@fontsource/ibm-plex-mono@5.2.7": {}
 

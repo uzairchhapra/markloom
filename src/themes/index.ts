@@ -20,7 +20,7 @@ export const themes = {
     name: "terminal",
     label: "Terminal",
     description:
-      "A developer-oriented theme inspired by command-line interfaces.",
+      "A developer-oriented theme with the rhythm of a typewritten terminal.",
     stylesheet: "/src/themes/terminal/theme.css",
   },
 } satisfies Record<ThemeName, ThemeDefinition>;
