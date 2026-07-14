@@ -1,14 +1,31 @@
-# Security
+# Security Policy
 
-Markloom is static-first and should not require runtime network access, API keys, authentication, a database, or a backend server.
+## Report A Vulnerability
 
-## Defaults
+Do not open a public issue for a suspected vulnerability.
 
-- Mermaid is initialized with `securityLevel: "strict"`.
-- Future MCP write tools must validate structured input and restrict writes to approved content directories.
-- Markdown rendering must not introduce arbitrary script execution.
-- Production builds should fail on invalid public content.
+Use the repository's **Security > Report a vulnerability** form to send a
+private security advisory. Include the affected version, reproduction steps,
+impact, and any suggested mitigation.
 
-## Reporting
+Maintainers will acknowledge the report, assess severity, and coordinate a fix
+and disclosure timeline with the reporter.
 
-Please report security issues privately to the maintainers before public disclosure.
+## Supported Versions
+
+Security fixes target the latest released version. Upgrade to the newest
+release before reporting an issue that may already be resolved.
+
+## Automated Checks
+
+- CodeQL scans JavaScript and TypeScript changes.
+- Dependency Review blocks pull requests that introduce known vulnerabilities.
+- Dependabot monitors npm packages and GitHub Actions for security and version
+  updates.
+
+## Security Defaults
+
+- Mermaid runs with strict security settings.
+- Production builds reject invalid public configuration and content.
+- Markloom does not require runtime secrets, authentication, a database, or a
+  backend server.

@@ -2,115 +2,88 @@
 
 **Beautiful websites, woven from Markdown.**
 
-Markloom builds complete websites from Markdown. Write content in `content/`,
-configure the site in `markloom.yaml`, add static assets in `public/`, and
-generate a polished Astro static site.
+Markloom turns Markdown, YAML, and static assets into a complete Astro website.
+It includes portfolio pages, projects, a blog, search, RSS, sitemaps, Mermaid
+diagrams, and three responsive themes.
 
-## Status
-
-This repository is the first production-oriented scaffold for the Markloom
-engine. It establishes the public content contract, normalized internal models,
-three bundled themes, Mermaid rendering, fixture hooks, tests, and CI.
-
-## Included Example
-
-The root site is a complete fictional portfolio for **John Doe**, an independent
-product engineer. It demonstrates a home page, project case studies, work
-experience, writing, an about page, search, theme switching, and responsive
-layouts using only `markloom.yaml`, `content/`, and `public/`.
-
-Visit `/themes/` in the running site to compare the same John Doe portfolio in
-the Minimal, Editorial, and Terminal themes, then open any theme as a complete
-live example.
+> [!IMPORTANT]
+> Markloom is currently distributed as a complete repository, not as an npm
+> library or CLI. The root package is private and `npm install markloom` is not
+> supported yet. GitHub release versions track the engine in this repository.
 
 ## Quick Start
 
+Fork this repository, then run:
+
 ```bash
+nvm install
+nvm use
 corepack enable
 corepack pnpm install
 corepack pnpm dev
 ```
 
-Build the static site and Pagefind index:
+Open `http://localhost:4321`. The included site is a fictional John Doe
+portfolio that can be replaced entirely through configuration and content
+files.
+
+## Make It Yours
+
+Site owners normally edit only:
+
+```text
+markloom.yaml       Site identity, navigation, social links, and theme
+content/            Pages, posts, projects, authors, and experience
+public/             Images, downloads, icons, and other static files
+```
+
+1. Replace the John Doe values in `markloom.yaml`.
+2. Replace or remove the example files under `content/`.
+3. Put images in `public/images/` and reference them as `/images/name.jpg`.
+4. Validate and build the site.
 
 ```bash
+corepack pnpm validate
 corepack pnpm build
 ```
 
-## Authoring Surface
+The generated static site is written to `dist/`.
 
-Most site owners should only edit:
+## User Guides
 
-- `content/`
-- `markloom.yaml`
-- `public/`
+- [Set up a site](docs/getting-started.md)
+- [Write content](docs/content.md)
+- [Deploy to GitHub Pages](docs/github-pages.md)
+- [View the complete schema](docs/schema.md)
 
-Engine and theme contributors work in `src/`.
+## Themes
 
-## Project Structure
+Set `site.theme` in `markloom.yaml` to `minimal`, `editorial`, or `terminal`.
+Set `theme.appearance` to `light`, `dark`, or `system`.
 
-```text
-markloom.yaml        Versioned site configuration
-content/             Markdown and MDX content
-fixtures/            Compatibility fixture websites
-public/              Static files copied into the build
-src/config/          Config loading and validation
-src/core/            Framework-neutral business logic
-src/schema/          Versioned public schemas and normalization
-src/themes/          Theme contract and theme CSS
-tests/               Unit, contract, accessibility, e2e, and visual tests
-```
+The running example exposes `/themes/` so the same content can be compared
+across every bundled theme.
 
-Split files under `config/` remain supported for schema version 1 compatibility,
-but new sites should use `markloom.yaml`.
+## Security And Updates
 
-## GitHub Pages
+Pull requests run tests, CodeQL analysis, and dependency review. Dependabot
+checks npm packages and GitHub Actions weekly, grouping routine minor and patch
+updates while leaving major upgrades for individual review.
 
-The included Pages workflow builds and deploys the site after changes reach
-`main`. In repository settings, choose **GitHub Actions** as the Pages source.
-The workflow supplies the public Pages URL to Markloom, so project subpaths such
-as `/my-website/` do not require editing Astro code.
+See [SECURITY.md](SECURITY.md) to report a vulnerability privately.
 
-For other static hosts, set `site.url` to the complete public root. Markloom
-uses its pathname as the deployment base:
+## Engine Development
 
-```yaml
-site:
-  url: https://username.github.io/my-website/
-```
+Engine contributors work in `src/`, `scripts/`, `fixtures/`, and `tests/`.
+Site content and engine code are intentionally separate so content can survive
+engine upgrades.
 
-## First Milestone
+Markloom uses Conventional Commits and Release Please. `fix:` creates a patch
+release, `feat:` creates a minor release, and a breaking-change marker creates a
+major release.
 
-- Versioned schemas
-- Normalized content model
-- Blog and project support
-- Mermaid rendering with strict client-side initialization
-- Minimal, Editorial, and Terminal theme tokens
-- Light, dark, and system appearance handling
-- Fixture-based tests
-- GitHub Actions CI
+Additional maintainer references:
 
-## Releases
-
-Markloom uses Conventional Commits and Release Please for automatic semantic
-versioning. Successful pushes to `main` update a release PR; merging that PR
-updates `package.json` and `CHANGELOG.md`, creates the version tag, and publishes
-a GitHub release.
-
-Release impact follows commit intent: `fix:` is patch, `feat:` is minor, and a
-breaking-change marker is major.
-
-## Product Direction
-
-```bash
-pnpm create markloom
-markloom dev
-markloom build
-markloom validate
-markloom migrate
-markloom mcp
-```
-
-The future CLI and MCP server should be adapters over the same shared core used by Astro rendering.
-See [docs/product-strategy.md](docs/product-strategy.md) for the staged product
-and packaging plan.
+- [Product strategy](docs/product-strategy.md)
+- [Theme contract](docs/theme-contract.md)
+- [MCP direction](docs/mcp.md)

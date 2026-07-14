@@ -46,7 +46,10 @@ jobs:
 
   release:
     name: Release
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: >-
+      github.repository == 'uzairchhapra/markloom' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main'
     needs: [verify, security]
     runs-on: ubuntu-latest
     permissions:
