@@ -8,3 +8,11 @@ test("homepage has no detectable accessibility violations", async ({
   const results = await new AxeBuilder({ page }).analyze();
   expect(results.violations).toEqual([]);
 });
+
+test("theme gallery has no detectable accessibility violations", async ({
+  page,
+}) => {
+  await page.goto("/themes/");
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});

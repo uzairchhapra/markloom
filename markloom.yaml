@@ -16,6 +16,8 @@ navigation:
       href: /blog/
     - label: About
       href: /about/
+    - label: Themes
+      href: /themes/
     - label: Search
       href: /search/
 

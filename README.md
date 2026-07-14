@@ -8,7 +8,9 @@ generate a polished Astro static site.
 
 ## Status
 
-This repository is the first production-oriented scaffold for the Markloom engine. It establishes the public content contract, normalized internal models, a Minimal theme, Mermaid rendering, fixture hooks, tests, and CI.
+This repository is the first production-oriented scaffold for the Markloom
+engine. It establishes the public content contract, normalized internal models,
+three bundled themes, Mermaid rendering, fixture hooks, tests, and CI.
 
 ## Included Example
 
@@ -16,6 +18,10 @@ The root site is a complete fictional portfolio for **John Doe**, an independent
 product engineer. It demonstrates a home page, project case studies, work
 experience, writing, an about page, search, theme switching, and responsive
 layouts using only `markloom.yaml`, `content/`, and `public/`.
+
+Visit `/themes/` in the running site to compare the same John Doe portfolio in
+the Minimal, Editorial, and Terminal themes, then open any theme as a complete
+live example.
 
 ## Quick Start
 
