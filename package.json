@@ -1,6 +1,6 @@
 {
   "name": "markloom",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Beautiful websites, woven from Markdown.",
   "type": "module",
   "private": true,
