@@ -18,20 +18,20 @@ importers:
         specifier: ^3.4.2
         version: 3.7.3
       '@fontsource/barlow-condensed':
-        specifier: ^5.2.8
-        version: 5.2.8
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/courier-prime':
-        specifier: ^5.2.8
-        version: 5.2.8
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/ibm-plex-mono':
-        specifier: ^5.2.7
-        version: 5.2.7
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/ibm-plex-sans':
-        specifier: ^5.2.8
-        version: 5.2.8
+        specifier: ^5.3.0
+        version: 5.3.0
       '@lucide/astro':
-        specifier: ^1.24.0
-        version: 1.24.0(astro@5.18.2(@types/node@24.13.3)(rollup@4.62.2)(tsx@4.23.1)(typescript@5.9.3)(yaml@2.9.0))
+        specifier: ^1.25.0
+        version: 1.25.0(astro@5.18.2(@types/node@24.13.3)(rollup@4.62.2)(tsx@4.23.1)(typescript@5.9.3)(yaml@2.9.0))
       astro:
         specifier: ^5.12.0
         version: 5.18.2(@types/node@24.13.3)(rollup@4.62.2)(tsx@4.23.1)(typescript@5.9.3)(yaml@2.9.0)
@@ -729,17 +729,17 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fontsource/barlow-condensed@5.2.8':
-    resolution: {integrity: sha512-cmCWNfh7oCmfarGDlhiJRkl4HOgt9aOqki7IYtDOaI3qLCeEO/8VjiZeAx/2PEPf4K36YxXDjAlOWwW/anQUZA==}
+  '@fontsource/barlow-condensed@5.3.0':
+    resolution: {integrity: sha512-RA7MmIx0v3eQ6Gcf74qLVLOwLB0GpPOzx+eU9iG/AmCnSJGcIWYeU8y6CEMGZ210MGwGg5CZhzLkkvyZdTTk1g==}
 
-  '@fontsource/courier-prime@5.2.8':
-    resolution: {integrity: sha512-M3xOCcXnGuFi9TcGCrz4hm5yeWg4Sn35MALRLPnqNoHhawTFvhyi2KSI2+5RyFtDNJrb58bPh8LLipgiI9KA0w==}
+  '@fontsource/courier-prime@5.3.0':
+    resolution: {integrity: sha512-KIi1k4VG1Wv+/CGpb1AUpLkUuOAQA6zmvthqxOZGN0AV8BEgQgbK7qAtquv14zsBJAY1bb5BHIEbWVFLgENh0w==}
 
-  '@fontsource/ibm-plex-mono@5.2.7':
-    resolution: {integrity: sha512-MKAb8qV+CaiMQn2B0dIi1OV3565NYzp3WN5b4oT6LTkk+F0jR6j0ZN+5BKJiIhffDC3rtBULsYZE65+0018z9w==}
+  '@fontsource/ibm-plex-mono@5.3.0':
+    resolution: {integrity: sha512-eTgnZjZEGk1QtD3ZstF+Vclo2HLAni8YMy34/DxllwZvyz1lR/1RF/xTiAquOBO7MvqBx8D2Ig2WCPMVfdZu7Q==}
 
-  '@fontsource/ibm-plex-sans@5.2.8':
-    resolution: {integrity: sha512-eztSXjDhPhcpxNIiGTgMebdLP9qS4rWkysuE1V7c+DjOR0qiezaiDaTwQE7bTnG5HxAY/8M43XKDvs3cYq6ZYQ==}
+  '@fontsource/ibm-plex-sans@5.3.0':
+    resolution: {integrity: sha512-CbE4CbbEEZJX860XyUiRpsksXIQR8Rp2XDva2VO53NJox9tVNtusrysd2x5YkUEY3ErQ66W1IiiQL8/wihhw5w==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -907,8 +907,8 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
-  '@lucide/astro@1.24.0':
-    resolution: {integrity: sha512-UmQrHv3/SfulzmALy6M0H4TOAaql/OG68V7yoFDW4g4F49vQ8o32NQHK4xBm+8k8zD/JQNHt00z2YRKXJ6bnCA==}
+  '@lucide/astro@1.25.0':
+    resolution: {integrity: sha512-Ff9/vyOgeWoED4Uof2uRtO68KYcOA3eOZbEJ+SN5dW4PuMPz68Kze7Il6gfB6axq+xDocY/zz4j2Qs7ix/SkPQ==}
     peerDependencies:
       astro: ^4 || ^5 || ^6 || ^7
 
@@ -4001,13 +4001,13 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@fontsource/barlow-condensed@5.2.8': {}
+  '@fontsource/barlow-condensed@5.3.0': {}
 
-  '@fontsource/courier-prime@5.2.8': {}
+  '@fontsource/courier-prime@5.3.0': {}
 
-  '@fontsource/ibm-plex-mono@5.2.7': {}
+  '@fontsource/ibm-plex-mono@5.3.0': {}
 
-  '@fontsource/ibm-plex-sans@5.2.8': {}
+  '@fontsource/ibm-plex-sans@5.3.0': {}
 
   '@humanfs/core@0.19.2':
     dependencies:
@@ -4132,7 +4132,7 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
-  '@lucide/astro@1.24.0(astro@5.18.2(@types/node@24.13.3)(rollup@4.62.2)(tsx@4.23.1)(typescript@5.9.3)(yaml@2.9.0))':
+  '@lucide/astro@1.25.0(astro@5.18.2(@types/node@24.13.3)(rollup@4.62.2)(tsx@4.23.1)(typescript@5.9.3)(yaml@2.9.0))':
     dependencies:
       astro: 5.18.2(@types/node@24.13.3)(rollup@4.62.2)(tsx@4.23.1)(typescript@5.9.3)(yaml@2.9.0)
 
